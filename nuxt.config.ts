@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     preset: 'github-pages',
   },
   app: {
+    baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
       title: 'atee - 30자만 적으면, 너만의 웹사이트 완성',
       meta: [

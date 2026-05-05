@@ -31,6 +31,8 @@ jobs:
       - run: pnpm install
 
       - run: pnpm generate
+        env:
+          NUXT_APP_BASE_URL: /atee-landing/
 
       - uses: actions/upload-pages-artifact@v3
         with:
