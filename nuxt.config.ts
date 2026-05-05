@@ -3,6 +3,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
+  nitro: {
+    preset: 'github-pages',
+  },
   app: {
     head: {
       title: 'atee - 30자만 적으면, 너만의 웹사이트 완성',
