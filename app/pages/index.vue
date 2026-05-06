@@ -7,6 +7,7 @@ import {
   Lightbulb,
   Rocket,
   ChevronRight,
+  ExternalLink,
 } from 'lucide-vue-next'
 
 useScrollReveal()
@@ -37,6 +38,17 @@ const steps = [
     subtitle: 'site.atee.app 배포',
     description: '완성된 서비스를 site.atee.app 주소로 배포합니다.',
   },
+]
+
+const works = [
+  { slug: 'bnbtips', name: 'bnb tips', desc: '에어비앤비 호스트를 위한 운영 팁 서비스', url: 'https://bnb.tips' },
+  { slug: 'gonggoya', name: '공고야', desc: '공공 입찰 공고 모니터링 플랫폼', url: 'https://gonggoya.com' },
+  { slug: 'mooagent', name: '무에이전트', desc: '부동산 직거래 매칭 서비스', url: 'https://mooagent.com' },
+  { slug: 'pactery', name: '팩터리', desc: '스마트 팩토리 관리 솔루션', url: 'https://pactery.com' },
+  { slug: 'booboo2', name: '부부생활', desc: '부부 관계 개선 가이드 서비스', url: 'https://booboolife.com' },
+  { slug: 'okpat', name: 'okpatent', desc: '특허 검색 및 분석 플랫폼', url: 'https://okpatent.co.kr' },
+  { slug: 'rework', name: 'rework', desc: '리모트 워크 채용 플랫폼', url: 'https://rework.kr' },
+  { slug: 'absynote', name: 'absynote', desc: '심플한 메모 및 노트 앱', url: 'https://absynote.atee.app' },
 ]
 
 const plans = [
@@ -278,6 +290,56 @@ const plans = [
               신청하기
             </NuxtLink>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Works (Portfolio) Section -->
+    <section id="works" class="relative py-24 sm:py-32 px-4 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-gray-950 via-gray-900/30 to-gray-950" />
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent" />
+
+      <div class="relative max-w-6xl mx-auto">
+        <div class="reveal text-center mb-16">
+          <p class="text-brand-400 font-medium text-sm mb-3 uppercase tracking-wide">Our Works</p>
+          <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+            만든 것들
+          </h2>
+          <p class="text-gray-400 max-w-xl mx-auto">
+            atee가 아이디어에서 현실로 만든 서비스들입니다.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <a
+            v-for="(work, index) in works"
+            :key="work.slug"
+            :href="work.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="reveal group relative bg-gray-900/60 border border-gray-800/80 rounded-2xl overflow-hidden hover:border-brand-600/50 transition-all duration-300 shadow-lg shadow-black/10 hover:shadow-xl hover:shadow-brand-900/10 hover:-translate-y-1"
+            :style="{ transitionDelay: `${(index % 4) * 80}ms` }"
+          >
+            <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-brand-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+            <div class="relative aspect-[16/10] overflow-hidden bg-gray-800">
+              <img
+                :src="`/portfolio/${work.slug}.png`"
+                :alt="work.name"
+                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent" />
+            </div>
+
+            <div class="relative p-5">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-bold text-white group-hover:text-brand-400 transition-colors">{{ work.name }}</h3>
+                <ExternalLink class="w-4 h-4 text-gray-500 group-hover:text-brand-400 transition-colors" />
+              </div>
+              <p class="text-gray-400 text-sm leading-relaxed">{{ work.desc }}</p>
+            </div>
+          </a>
         </div>
       </div>
     </section>
