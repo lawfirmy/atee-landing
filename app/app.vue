@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { Menu, X } from 'lucide-vue-next'
+import { Menu, X, LogOut, User } from 'lucide-vue-next'
 
 const mobileMenuOpen = ref(false)
 const route = useRoute()
+const { user, loading, isLoggedIn, init, logout } = useAuth()
+
+onMounted(() => {
+  init()
+})
 
 watch(() => route.fullPath, () => {
   mobileMenuOpen.value = false
@@ -13,6 +18,11 @@ const navLinks = [
   { label: '사례', to: '/#works' },
   { label: '가격', to: '/#pricing' },
 ]
+
+function handleLogout() {
+  logout()
+  navigateTo('/')
+}
 </script>
 
 <template>
@@ -34,12 +44,46 @@ const navLinks = [
           >
             {{ link.label }}
           </NuxtLink>
-          <NuxtLink
-            to="/apply"
-            class="bg-brand-600 text-white px-4 py-2 rounded-lg hover:bg-brand-500 transition-colors duration-200"
-          >
-            신청하기
-          </NuxtLink>
+
+          <template v-if="!loading">
+            <!-- Logged in -->
+            <template v-if="isLoggedIn">
+              <NuxtLink
+                to="/apply"
+                class="bg-brand-600 text-white px-4 py-2 rounded-lg hover:bg-brand-500 transition-colors duration-200"
+              >
+                신청하기
+              </NuxtLink>
+              <div class="flex items-center gap-3 text-gray-400">
+                <span class="flex items-center gap-1.5 text-sm">
+                  <User class="w-3.5 h-3.5" />
+                  {{ user?.name || user?.email }}
+                </span>
+                <button
+                  class="flex items-center gap-1 text-sm text-gray-500 hover:text-white transition-colors"
+                  @click="handleLogout"
+                >
+                  <LogOut class="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </template>
+
+            <!-- Not logged in -->
+            <template v-else>
+              <NuxtLink
+                to="/login"
+                class="hover:text-white transition-colors"
+              >
+                로그인
+              </NuxtLink>
+              <NuxtLink
+                to="/register"
+                class="bg-brand-600 text-white px-4 py-2 rounded-lg hover:bg-brand-500 transition-colors duration-200"
+              >
+                시작하기
+              </NuxtLink>
+            </template>
+          </template>
         </div>
 
         <!-- Mobile hamburger -->
@@ -75,13 +119,46 @@ const navLinks = [
             >
               {{ link.label }}
             </NuxtLink>
-            <NuxtLink
-              to="/apply"
-              class="bg-brand-600 text-white text-center px-3 py-2.5 rounded-lg hover:bg-brand-500 transition-colors text-sm mt-1"
-              @click="mobileMenuOpen = false"
-            >
-              신청하기
-            </NuxtLink>
+
+            <template v-if="!loading">
+              <template v-if="isLoggedIn">
+                <div class="flex items-center gap-1.5 px-3 py-2.5 text-sm text-gray-400">
+                  <User class="w-3.5 h-3.5" />
+                  {{ user?.name || user?.email }}
+                </div>
+                <NuxtLink
+                  to="/apply"
+                  class="bg-brand-600 text-white text-center px-3 py-2.5 rounded-lg hover:bg-brand-500 transition-colors text-sm mt-1"
+                  @click="mobileMenuOpen = false"
+                >
+                  신청하기
+                </NuxtLink>
+                <button
+                  class="flex items-center gap-1.5 text-gray-500 hover:text-white px-3 py-2.5 rounded-lg hover:bg-gray-900 transition-colors text-sm"
+                  @click="handleLogout(); mobileMenuOpen = false"
+                >
+                  <LogOut class="w-3.5 h-3.5" />
+                  로그아웃
+                </button>
+              </template>
+
+              <template v-else>
+                <NuxtLink
+                  to="/login"
+                  class="text-gray-400 hover:text-white px-3 py-2.5 rounded-lg hover:bg-gray-900 transition-colors text-sm"
+                  @click="mobileMenuOpen = false"
+                >
+                  로그인
+                </NuxtLink>
+                <NuxtLink
+                  to="/register"
+                  class="bg-brand-600 text-white text-center px-3 py-2.5 rounded-lg hover:bg-brand-500 transition-colors text-sm mt-1"
+                  @click="mobileMenuOpen = false"
+                >
+                  시작하기
+                </NuxtLink>
+              </template>
+            </template>
           </div>
         </div>
       </Transition>

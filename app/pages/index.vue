@@ -11,12 +11,16 @@ import {
 } from 'lucide-vue-next'
 
 useScrollReveal()
+const { isLoggedIn } = useAuth()
 
 const ideaInput = ref('')
 
+const ctaTarget = computed(() => isLoggedIn.value ? '/apply' : '/register')
+
 function handleStart() {
+  const base = isLoggedIn.value ? '/apply' : '/register'
   const query = ideaInput.value.trim() ? `?idea=${encodeURIComponent(ideaInput.value.trim())}` : ''
-  navigateTo(`/apply${query}`)
+  navigateTo(`${base}${query}`)
 }
 
 const steps = [
@@ -279,7 +283,7 @@ const plans = [
             </ul>
 
             <NuxtLink
-              to="/apply"
+              :to="ctaTarget"
               class="block w-full text-center py-3 rounded-xl font-semibold transition-all duration-200"
               :class="[
                 plan.highlighted
@@ -359,7 +363,7 @@ const plans = [
             A4 용지 1장 분량의 아이디어만 준비하세요. 나머지는 저희가 합니다.
           </p>
           <NuxtLink
-            to="/apply"
+            :to="ctaTarget"
             class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-brand-600/30 shadow-md shadow-brand-900/40"
           >
             아이디어를 현실로 만드세요
