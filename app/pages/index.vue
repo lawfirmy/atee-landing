@@ -97,8 +97,14 @@ const plans = [
   <div>
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center px-4 pt-16 overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-b from-brand-950/30 via-gray-950 to-gray-950" />
-      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-600/10 rounded-full blur-3xl" />
+      <!-- Background layers -->
+      <div class="absolute inset-0 bg-gradient-to-b from-brand-950/40 via-gray-950 to-gray-950" />
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-brand-600/15 rounded-full blur-[120px]" />
+      <div class="absolute top-1/3 left-1/4 w-[300px] h-[300px] bg-blue-600/10 rounded-full blur-[100px]" />
+      <div class="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] bg-purple-600/8 rounded-full blur-[80px]" />
+
+      <!-- Grid pattern overlay -->
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
 
       <div class="relative text-center max-w-3xl mx-auto">
         <div class="reveal">
@@ -107,7 +113,7 @@ const plans = [
           </p>
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
             아이디어를<br />
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-blue-400">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-blue-400 to-purple-400">
               현실로
             </span>
             만드세요
@@ -125,7 +131,7 @@ const plans = [
               type="text"
               maxlength="30"
               placeholder="만들고 싶은 서비스를 한 줄로 적어보세요"
-              class="w-full bg-gray-900 border border-gray-700 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all"
+              class="w-full bg-gray-900/80 border border-gray-700/80 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/50 transition-all shadow-lg shadow-black/20"
               @keyup.enter="handleStart"
             />
             <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-500">
@@ -133,7 +139,7 @@ const plans = [
             </span>
           </div>
           <button
-            class="w-full sm:w-auto whitespace-nowrap bg-brand-600 hover:bg-brand-500 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-brand-600/25 flex items-center justify-center gap-2"
+            class="w-full sm:w-auto whitespace-nowrap bg-brand-600 hover:bg-brand-500 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-brand-600/30 flex items-center justify-center gap-2 shadow-md shadow-brand-900/40"
             @click="handleStart"
           >
             시작하기
@@ -145,11 +151,18 @@ const plans = [
           이미 <span class="text-gray-300">50+</span>개의 프로젝트가 atee에서 시작되었습니다
         </p>
       </div>
+
+      <!-- Bottom fade -->
+      <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-950 to-transparent" />
     </section>
 
     <!-- Process Section -->
-    <section id="process" class="py-24 sm:py-32 px-4">
-      <div class="max-w-6xl mx-auto">
+    <section id="process" class="relative py-24 sm:py-32 px-4 overflow-hidden">
+      <!-- Subtle background -->
+      <div class="absolute inset-0 bg-gradient-to-b from-gray-950 via-gray-900/40 to-gray-950" />
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent" />
+
+      <div class="relative max-w-6xl mx-auto">
         <div class="reveal text-center mb-16">
           <p class="text-brand-400 font-medium text-sm mb-3 uppercase tracking-wide">How it works</p>
           <h2 class="text-3xl sm:text-4xl font-bold mb-4">
@@ -164,20 +177,25 @@ const plans = [
           <div
             v-for="(step, index) in steps"
             :key="step.title"
-            class="reveal group relative bg-gray-900/50 border border-gray-800 rounded-2xl p-8 hover:border-brand-600/50 transition-all duration-300"
+            class="reveal group relative bg-gray-900/60 border border-gray-800/80 rounded-2xl p-8 hover:border-brand-600/50 transition-all duration-300 shadow-lg shadow-black/10 hover:shadow-xl hover:shadow-brand-900/10 hover:-translate-y-1"
             :style="{ transitionDelay: `${index * 100}ms` }"
           >
-            <div class="flex items-center gap-3 mb-6">
-              <div class="w-12 h-12 bg-brand-600/10 rounded-xl flex items-center justify-center group-hover:bg-brand-600/20 transition-colors">
-                <component :is="step.icon" class="w-6 h-6 text-brand-400" />
+            <!-- Card glow on hover -->
+            <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-brand-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+            <div class="relative">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 bg-brand-600/10 border border-brand-600/20 rounded-xl flex items-center justify-center group-hover:bg-brand-600/20 group-hover:border-brand-500/30 transition-all shadow-inner">
+                  <component :is="step.icon" class="w-6 h-6 text-brand-400" />
+                </div>
+                <div>
+                  <span class="text-xs text-gray-500 font-medium">STEP {{ index + 1 }}</span>
+                  <h3 class="text-lg font-bold">{{ step.title }}</h3>
+                </div>
               </div>
-              <div>
-                <span class="text-xs text-gray-500 font-medium">STEP {{ index + 1 }}</span>
-                <h3 class="text-lg font-bold">{{ step.title }}</h3>
-              </div>
+              <p class="text-sm text-brand-400 font-medium mb-2">{{ step.subtitle }}</p>
+              <p class="text-gray-400 text-sm leading-relaxed">{{ step.description }}</p>
             </div>
-            <p class="text-sm text-brand-400 font-medium mb-2">{{ step.subtitle }}</p>
-            <p class="text-gray-400 text-sm leading-relaxed">{{ step.description }}</p>
 
             <ChevronRight
               v-if="index < steps.length - 1"
@@ -189,8 +207,15 @@ const plans = [
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-24 sm:py-32 px-4 bg-gray-900/30">
-      <div class="max-w-6xl mx-auto">
+    <section id="pricing" class="relative py-24 sm:py-32 px-4 overflow-hidden">
+      <!-- Background -->
+      <div class="absolute inset-0 bg-gradient-to-b from-gray-950 via-gray-900/50 to-gray-950" />
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent" />
+      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent" />
+      <!-- Decorative glow -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-600/5 rounded-full blur-[120px]" />
+
+      <div class="relative max-w-6xl mx-auto">
         <div class="reveal text-center mb-16">
           <p class="text-brand-400 font-medium text-sm mb-3 uppercase tracking-wide">Pricing</p>
           <h2 class="text-3xl sm:text-4xl font-bold mb-4">
@@ -205,17 +230,17 @@ const plans = [
           <div
             v-for="(plan, index) in plans"
             :key="plan.name"
-            class="reveal relative rounded-2xl p-8 transition-all duration-300"
+            class="reveal relative rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1"
             :class="[
               plan.highlighted
-                ? 'bg-gradient-to-b from-brand-950/80 to-gray-900 border-2 border-brand-500 shadow-xl shadow-brand-600/10'
-                : 'bg-gray-900/50 border border-gray-800 hover:border-gray-700',
+                ? 'bg-gradient-to-b from-brand-950/80 via-brand-950/40 to-gray-900 border-2 border-brand-500/70 shadow-2xl shadow-brand-600/15 ring-1 ring-brand-500/20'
+                : 'bg-gray-900/60 border border-gray-800/80 hover:border-gray-700 shadow-lg shadow-black/10 hover:shadow-xl hover:shadow-black/20',
             ]"
             :style="{ transitionDelay: `${index * 100}ms` }"
           >
             <div
               v-if="plan.highlighted"
-              class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-xs font-bold px-4 py-1 rounded-full"
+              class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-600 to-brand-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg shadow-brand-600/30"
             >
               인기
             </div>
@@ -247,7 +272,7 @@ const plans = [
               :class="[
                 plan.highlighted
                   ? 'bg-brand-600 hover:bg-brand-500 text-white hover:shadow-lg hover:shadow-brand-600/25'
-                  : 'bg-gray-800 hover:bg-gray-700 text-gray-300',
+                  : 'bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700/50',
               ]"
             >
               신청하기
@@ -258,21 +283,27 @@ const plans = [
     </section>
 
     <!-- CTA Banner -->
-    <section class="py-24 sm:py-32 px-4">
-      <div class="max-w-3xl mx-auto reveal text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">
-          아이디어만 적으면 끝
-        </h2>
-        <p class="text-gray-400 text-lg mb-8">
-          A4 용지 1장 분량의 아이디어만 준비하세요. 나머지는 저희가 합니다.
-        </p>
-        <NuxtLink
-          to="/apply"
-          class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-brand-600/25"
-        >
-          아이디어를 현실로 만드세요
-          <ArrowRight class="w-4 h-4" />
-        </NuxtLink>
+    <section class="relative py-24 sm:py-32 px-4 overflow-hidden">
+      <!-- Background glow -->
+      <div class="absolute inset-0 bg-gradient-to-b from-gray-950 via-gray-900/30 to-gray-950" />
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-brand-600/8 rounded-full blur-[100px]" />
+
+      <div class="relative max-w-3xl mx-auto reveal text-center">
+        <div class="bg-gradient-to-b from-gray-900/80 to-gray-900/40 border border-gray-800/60 rounded-3xl p-10 sm:p-16 shadow-2xl shadow-black/20">
+          <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+            아이디어만 적으면 끝
+          </h2>
+          <p class="text-gray-400 text-lg mb-8">
+            A4 용지 1장 분량의 아이디어만 준비하세요. 나머지는 저희가 합니다.
+          </p>
+          <NuxtLink
+            to="/apply"
+            class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-brand-600/30 shadow-md shadow-brand-900/40"
+          >
+            아이디어를 현실로 만드세요
+            <ArrowRight class="w-4 h-4" />
+          </NuxtLink>
+        </div>
       </div>
     </section>
   </div>
