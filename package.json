@@ -10,6 +10,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/content": "^3.13.0",
+    "@tailwindcss/typography": "^0.5.19",
     "@tiptap/extension-placeholder": "^3.22.5",
     "@tiptap/extension-underline": "^3.22.5",
     "@tiptap/starter-kit": "^3.22.5",
@@ -20,12 +22,14 @@
     "vue-router": "^5.0.6"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.14.0"
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "better-sqlite3": "^12.9.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "@parcel/watcher",
-      "esbuild"
+      "esbuild",
+      "better-sqlite3"
     ]
   }
 }

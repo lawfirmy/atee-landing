@@ -17,6 +17,7 @@ const navLinks = [
   { label: '프로세스', to: '/#process' },
   { label: '사례', to: '/#works' },
   { label: '가격', to: '/#pricing' },
+  { label: '인사이트', to: '/insights' },
 ]
 
 function handleLogout() {

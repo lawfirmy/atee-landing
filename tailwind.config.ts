@@ -3,6 +3,7 @@ import type { Config } from 'tailwindcss'
 export default {
   content: [
     './app/**/*.{vue,ts}',
+    './content/**/*.md',
   ],
   theme: {
     extend: {
@@ -26,5 +27,7 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 } satisfies Config
