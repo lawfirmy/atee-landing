@@ -6,6 +6,9 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'github-pages',
   },
+  routeRules: {
+    '/landing': { redirect: '/' },
+  },
   app: {
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
