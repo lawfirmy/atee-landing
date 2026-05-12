@@ -46,6 +46,13 @@ function handleLogout() {
             {{ link.label }}
           </NuxtLink>
 
+          <NuxtLink
+            to="/quick-fix"
+            class="border border-brand-500/60 text-brand-400 hover:bg-brand-600/10 px-4 py-2 rounded-lg transition-colors duration-200 whitespace-nowrap"
+          >
+            빠른 수정신청
+          </NuxtLink>
+
           <template v-if="!loading">
             <!-- Logged in -->
             <template v-if="isLoggedIn">
@@ -81,7 +88,7 @@ function handleLogout() {
                 to="/register"
                 class="bg-brand-600 text-white px-4 py-2 rounded-lg hover:bg-brand-500 transition-colors duration-200"
               >
-                시작하기
+                신청하기
               </NuxtLink>
             </template>
           </template>
@@ -121,6 +128,14 @@ function handleLogout() {
               {{ link.label }}
             </NuxtLink>
 
+            <NuxtLink
+              to="/quick-fix"
+              class="border border-brand-500/60 text-brand-400 text-center px-3 py-2.5 rounded-lg hover:bg-brand-600/10 transition-colors text-sm mt-1"
+              @click="mobileMenuOpen = false"
+            >
+              빠른 수정신청
+            </NuxtLink>
+
             <template v-if="!loading">
               <template v-if="isLoggedIn">
                 <div class="flex items-center gap-1.5 px-3 py-2.5 text-sm text-gray-400">
@@ -156,7 +171,7 @@ function handleLogout() {
                   class="bg-brand-600 text-white text-center px-3 py-2.5 rounded-lg hover:bg-brand-500 transition-colors text-sm mt-1"
                   @click="mobileMenuOpen = false"
                 >
-                  시작하기
+                  신청하기
                 </NuxtLink>
               </template>
             </template>
